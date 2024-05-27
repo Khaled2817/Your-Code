@@ -7,6 +7,7 @@ import 'Shop_App/ClassesHelper/CashMemmory.dart';
 import 'Shop_App/ClassesHelper/DioHelper.dart';
 import 'Shop_App/ShopApp/Screens/AuthSreens/login.dart';
 import 'Shop_App/ShopApp/Screens/Home/Home.dart';
+import 'Shop_App/ShopApp/Screens/Home/SearchScreen.dart';
 import 'Shop_App/ShopApp/Screens/onbordingScreen/OnpordingScreen.dart';
 import 'Shop_App/ShopApp/cubits/LoginClassStatus copy.dart';
 import 'Shop_App/ShopApp/cubits/LoginCubit.dart';
@@ -17,6 +18,7 @@ import 'Shop_App/bloc_obsorv/bloc_obsorv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = Myblocstates();
+  print("khaled zaki");
   await DioHelper.init();
   await CashMemmory.init();
   bool? isDark = CashMemmory.getData(key: 'isDark');
@@ -44,11 +46,8 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) =>
-                ShopAppCubit(shopinitialState())..changemod(valuefromShard: isDark)
-                ..getHomedat()
-                ..getcatigories()
-                ..getFavorites()
-                ..UserProfile(),
+                ShopAppCubit(shopinitialState())..PostTaskApp()
+                
           ),
           BlocProvider(
             create: (context) => LoginCubit(LOgininitialState()),
@@ -71,21 +70,21 @@ class MyApp extends StatelessWidget {
            )),
                     
 //____________________________________________________________
-                darkTheme: ThemeData(
-                    scaffoldBackgroundColor: Colors.black,
-                    appBarTheme: AppBarTheme(backgroundColor: Colors.black),
-                     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            type:BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.deepOrange,
-            unselectedItemColor: Colors.grey,
-            elevation:50.0,
-            backgroundColor: Colors.black
-           )),
+          //       darkTheme: ThemeData(
+          //           scaffoldBackgroundColor: Colors.black,
+          //           appBarTheme: AppBarTheme(backgroundColor: Colors.black),
+          //            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          //   type:BottomNavigationBarType.fixed,
+          //   selectedItemColor: Colors.deepOrange,
+          //   unselectedItemColor: Colors.grey,
+          //   elevation:50.0,
+          //   backgroundColor: Colors.black
+          //  )),
                 debugShowCheckedModeBanner: false,
-                themeMode: ShopAppCubit.get(context).isDark
-                    ? ThemeMode.light
-                    : ThemeMode.dark,
-                home:widget);
+                themeMode: 
+                     ThemeMode.light,
+                 
+                home:Home());
           },
         ));
   }

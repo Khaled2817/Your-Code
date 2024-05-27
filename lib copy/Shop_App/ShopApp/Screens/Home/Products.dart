@@ -4,9 +4,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../shardtool.dart';
 import '../../Modles/HomeModle.dart';
 import '../../cubits/ShopAppClassStatus.dart';
 import '../../cubits/shopAppCubit.dart';
+import 'GoogleMap.dart';
 
 class ProductScreen extends StatelessWidget {
   const ProductScreen({super.key});
@@ -108,94 +110,101 @@ Widget builditemproductes(Products model,context) {
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-              // ignore: prefer_const_literals_to_create_immutables
-              boxShadow: [
-                BoxShadow(
-                  color: const Color.fromARGB(255, 78, 75, 75),
-                  offset: const Offset(
-                    5.0,
-                    5.0,
-                  ),
-                  blurRadius: 5.0,
-                ), //BoxShadow
-                BoxShadow(
-                  color: Colors.white,
-                  offset: const Offset(0.0, 0.0),
-                  blurRadius: 0.0,
-                  spreadRadius: 0.0,
-                ), //BoxShadow
-              ]),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
+        child: InkWell(
+          onTap: (){
+NavigatToScreen(context,Googelmap());
+          },
+          child: Card(
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  // ignore: prefer_const_literals_to_create_immutables
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(255, 78, 75, 75),
+                      offset: const Offset(
+                        5.0,
+                        5.0,
+                      ),
+                      blurRadius: 5.0,
+                    ), //BoxShadow
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: const Offset(0.0, 0.0),
+                      blurRadius: 0.0,
+                      spreadRadius: 0.0,
+                    ), //BoxShadow
+                  ]),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image(
-                    image: NetworkImage('${model.image}'),
-                    width: double.infinity,
-                    height: 200,
-                  ),
-                  if (model.discount != 0)
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text(
-                          "DISCOUNT",
-                          style: TextStyle(fontSize: 9.1),
-                        ),
-                      ),
-                      color: Colors.red,
-                    ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Text(
-                      '${model.name}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14, height: 1.4),
-                    ),
-                    Row(children: [
-                      Text(
-                        '${model.price.round()}' + ' \$',
-                        style: TextStyle(
-                            fontSize: 12, height: 1.4, color: Colors.blue),
-                      ),
-                      SizedBox(
-                        width: 10,
+                  Stack(
+                    children: [
+                      Image(
+                        image: NetworkImage('${model.image}'),
+                        width: double.infinity,
+                        height: 200,
                       ),
                       if (model.discount != 0)
-                        Text(
-                          '${model.oldPrice.round()}',
-                          style: TextStyle(
-                              fontSize: 12,
-                              height: 1.4,
-                              color: Colors.grey,
-                              decoration: TextDecoration.lineThrough),
-                        ),
-                      Spacer(),
-                      IconButton(
-                          onPressed: () {
-ShopAppCubit.get(context).ChangFavorites(productid: model.id!);
-                          },
-                          icon: CircleAvatar(
-                            backgroundColor:ShopAppCubit.get(context).favoriteid[model.id]!?Color.fromARGB(88, 123, 123, 238):const Color.fromARGB(255, 192, 185, 185),
-                            child: Icon(
-                              Icons.favorite_border,
-                              size: 20,
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Text(
+                              "DISCOUNT",
+                              style: TextStyle(fontSize: 9.1),
                             ),
-                          ))
-                    ])
-                  ],
-                ),
-              )
-            ],
+                          ),
+                          color: Colors.red,
+                        ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          '${model.name}',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 14, height: 1.4),
+                        ),
+                        Row(children: [
+                          Text(
+                            '${model.price.round()}' + ' \$',
+                            style: TextStyle(
+                                fontSize: 12, height: 1.4, color: Colors.blue),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          if (model.discount != 0)
+                            Text(
+                              '${model.oldPrice.round()}',
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  height: 1.4,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough),
+                            ),
+                          Spacer(),
+                          IconButton(
+                              onPressed: () {
+            ShopAppCubit.get(context).ChangFavorites(productid: model.id!);
+                              },
+                              icon: CircleAvatar(
+                                backgroundColor:ShopAppCubit.get(context).favoriteid[model.id]!?Color.fromARGB(88, 123, 123, 238):const Color.fromARGB(255, 192, 185, 185),
+                                child: Icon(
+                                  Icons.favorite_border,
+                                  size: 20,
+                                ),
+                              ))
+                        ])
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       )

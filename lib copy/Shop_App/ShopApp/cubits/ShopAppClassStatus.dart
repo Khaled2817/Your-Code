@@ -21,3 +21,9 @@ class LoadinggetUserProfile extends ShopStates{}
 class Ispassword extends ShopStates{}
 class ScussecRegisterUserProfile extends ShopStates{}
 class ErorrRegisterUserProfile extends ShopStates{}
+
+
+class LoadingTaskapp extends ShopStates{}
+
+class ScussecTaskapp extends ShopStates{}
+class ErorrTaskapp extends ShopStates{}

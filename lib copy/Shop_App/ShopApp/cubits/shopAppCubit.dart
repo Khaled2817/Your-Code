@@ -9,10 +9,12 @@ import '../Modles/CatigorsModle.dart';
 import '../Modles/Favoritmodel.dart';
 import '../Modles/HomeModle.dart';
 import '../Modles/Modellogin.dart';
+import '../Modles/TaskModel.dart';
 import '../Modles/favmodelget.dart';
 import '../Screens/Home/Catigors.dart';
 import '../Screens/Home/Faviortes.dart';
 import '../Screens/Home/Products.dart';
+import '../Screens/Home/SearchScreen.dart';
 import '../Screens/Home/Settings.dart';
 import '../Screens/onbordingScreen/Onbordingclass.dart';
 import 'ShopAppClassStatus.dart';
@@ -69,7 +71,7 @@ print(nextpage);
 
 int curruntIndex=0;
 List<Widget> Screens=[
-ProductScreen(),
+TaskScreen(),
 CatigorsScreen(),
 FavoritScreen(),
 SettingScreen(),
@@ -204,5 +206,25 @@ Showtoast(msg: '${e.toString()}');
 emit(ErorrRegisterUserProfile());
 });
 }
+
+//------------------------------------------------------------------------------
+
+
+TaskModel? postTaskModel;
+void PostTaskApp({
+var context}){
+emit(LoadingTaskapp());
+DioHelper.postdata(url:'guest/get_near_branches',
+ data: {'lat':'0','lng':'0','page':'1'}).then((value){
+  postTaskModel=TaskModel.fromJson(value.data);
+  print(postTaskModel!.data![1].restaurant!.id);
+  print(value.data);
+  emit(ScussecTaskapp());
+}).catchError((error){
+  emit(ErorrTaskapp());
+  print('the error are');
+  print(error.toString());});
+}
+
 }
 

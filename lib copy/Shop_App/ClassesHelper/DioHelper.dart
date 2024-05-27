@@ -7,7 +7,7 @@ static late Dio dio;
 static init(){
 dio=Dio(
   BaseOptions(
-  baseUrl:'https://student.valuxapps.com/api/',
+  baseUrl:'http://onedigit.tech/mazij/public/api/',
   receiveDataWhenStatusError: true ));
 }
 
@@ -33,7 +33,7 @@ required Map<String ,dynamic> data,
 String? token,
 })async{
 dio.options.headers={
-'lang':'en',
+'lang':'ar',
 'Authorization':token??'',
 'Content-Type':'application/json',
 };
@@ -61,3 +61,5 @@ return await
 }
 
 }
+
+

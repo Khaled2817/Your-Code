@@ -37,6 +37,7 @@ SettinProfile()
 void Changenavbar(int index){
 curruntIndex=index;
 emit(ChangeNavBar());
+// khaled
 }
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
@@ -12,14 +11,14 @@ void NavigatToScreen(context,Widget Screen){
  Navigator.of(context).push( MaterialPageRoute(builder: (context) =>Screen));
 }
 
- Widget header(context) {
-    return const Column(
+ Widget header(context,{String ?head,String ?headline}) {
+    return Column(
       children: [
         Text(
-          "Welcome Back",
+          "${head}",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("${headline}"),
       ],
     );
   }

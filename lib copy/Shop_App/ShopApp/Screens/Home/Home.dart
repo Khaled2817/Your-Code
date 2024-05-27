@@ -18,13 +18,7 @@ class Home extends StatelessWidget {
       var cubit=ShopAppCubit.get(context);
       
       return Scaffold(
-        appBar: AppBar(title:Text("Salles"),actions: [
-
-          IconButton(onPressed: (){
-NavigatToScreen(context,SearshScreen());
-            
-          }, icon:Icon(Icons.search))
-        ],),
+        appBar: AppBar(),
              body:cubit.Screens[cubit.curruntIndex] ,
             bottomNavigationBar: BottomNavigationBar(
               elevation:10,
@@ -33,10 +27,10 @@ NavigatToScreen(context,SearshScreen());
               },
               currentIndex: cubit.curruntIndex,
               items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-              BottomNavigationBarItem(icon: Icon(Icons.apps),label: "Catigors"),
-              BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favorites"),
-              BottomNavigationBarItem(icon: Icon(Icons.settings),label: "Settings")
+              BottomNavigationBarItem(icon: Icon(Icons.home),label: "الرئيسية"),
+              BottomNavigationBarItem(icon: Icon(Icons.shop),label: "طلباتي"),
+              BottomNavigationBarItem(icon: Icon(Icons.chat),label: "الدردشة"),
+              BottomNavigationBarItem(icon: Icon(Icons.person),label: "حسابي"),
               ]
               
               ,
